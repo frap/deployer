@@ -40,14 +40,14 @@ func (dplr *deployer) postWebHook(w http.ResponseWriter, r *http.Request) {
 	log.Println("Received webhook notification")
 	hookData, err := NewDockerHubWebhookDataFromRequest(r)
 	if err != nil {
-		httpError(w, http.StatusInternalServerError, "Failed to initialize DockerHub Webhook parser")
+		httpError(w, http.StatusInternalServerError, "Failed to initialise DockerHub Webhook parser")
 		return
 	}
 	log.Printf("%+v", hookData)
 	// This application only accepts containers placed under the
 	// `securingdevops` dockerhub organization. If this wasn't an
 	// example application, we would make the namespacing configurable
-	if hookData.Repository.Namespace != `securingdevops` {
+	if hookData.Repository.Namespace != `frap` {
 		httpError(w, http.StatusUnauthorized, "Invalid namespace")
 		return
 	}
